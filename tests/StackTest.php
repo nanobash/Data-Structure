@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ProjectX\DataStructure\Test;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use ProjectX\DataStructure\Stack;
 
@@ -80,7 +81,7 @@ class StackTest extends TestCase
     {
         $this->stack->setStackItems($args);
 
-        $this->assertSame($args[count($args) - 1], $this->stack->peek(), "The peek() method does not return last item!");
+        $this->assertSame($args[$this->stack->getCount() - 1], $this->stack->peek(), "The peek() method does not return last item!");
     }
 
     /**
@@ -106,7 +107,29 @@ class StackTest extends TestCase
 
         $expected = array_reverse($this->stack->getStackItems());
 
-        $this->assertSame($expected, $this->stack->reverseStack()->getStackItems());
+        $this->assertSame($expected, $this->stack->reverseStack()->getStackItems(), "The reversed stack is incorrect!");
+    }
+
+    /**
+     * @dataProvider itemsProvider
+     *
+     * @param mixed ...$args
+     */
+    public function testLifoGenerator(...$args): void
+    {
+        $this->stack->setStackItems($args);
+
+        $generator = $this->stack->lifoGenerator();
+
+        $this->assertInstanceOf(Generator::class, $generator, "The method does not return Generator instance!");
+
+        $length = $this->stack->getCount() - 1;
+
+        foreach ($generator as $item) {
+            $this->assertSame($args[$length], $item, "The Generator does not return items in correct order!");
+
+            --$length;
+        }
     }
 
     public function testEmpty(): void
@@ -121,9 +144,9 @@ class StackTest extends TestCase
     {
         return [
             [2, 4, 6],
-            [0, null, '', "foo", false],
+            [0, null, '', "foo", false, function () {return "closure";}],
             ["foo", "bar", "foobar"],
-            ["foo", 20, "", null, true, ["foo", "bar"], (new \stdClass())]
+            ["foo", 20, '', 10.404, null, true, ["foo", "bar"], (new \stdClass())]
         ];
     }
 }

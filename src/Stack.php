@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ProjectX\DataStructure;
 
+use Generator;
 use ProjectX\DataStructure\Interfaces\StackInterface;
 
 /**
@@ -22,6 +23,8 @@ class Stack implements StackInterface
 {
     private $items = [];
 
+    private $count = 0;
+
     public function __construct(array $items = [])
     {
         $this->items = $items;
@@ -39,6 +42,8 @@ class Stack implements StackInterface
     {
         $this->items[] = $item;
 
+        ++$this->count;
+
         return $this;
     }
 
@@ -50,6 +55,8 @@ class Stack implements StackInterface
         if ($this->isEmpty()) {
             return null;
         }
+
+        --$this->count;
 
         return array_pop($this->items);
     }
@@ -63,7 +70,7 @@ class Stack implements StackInterface
             return null;
         }
 
-        return $this->items[count($this->items) - 1];
+        return $this->items[$this->getCount() - 1];
     }
 
     /**
@@ -81,6 +88,8 @@ class Stack implements StackInterface
     {
         $this->items = array_merge($this->items, $items);
 
+        $this->count += count($items);
+
         return $this;
     }
 
@@ -97,8 +106,26 @@ class Stack implements StackInterface
     /**
      * @inheritDoc
      */
+    public function lifoGenerator(): Generator
+    {
+        foreach ($this->reverseStack()->getStackItems() as $item) {
+            yield $item;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function isEmpty(): bool
     {
         return [] === $this->items;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCount(): int
+    {
+        return $this->count;
     }
 }
