@@ -138,15 +138,32 @@ class StackTest extends TestCase
     }
 
     /**
+     * @dataProvider itemsProvider
+     *
+     * @param mixed ...$args
+     */
+    public function testCount(...$args): void
+    {
+        $length = count($args);
+
+        $this->stack->push('foo');
+        $this->stack->setStackItems([1, true, '', (new \stdClass()), 1.4, function() {}, "/stuff/"]);
+        $this->stack->setStackItems($args);
+        $this->stack->pop();
+
+        $this->assertSame($args[$length - 1] + 7, $this->stack->getCount());
+    }
+
+    /**
      * @return array
      */
     public function itemsProvider(): array
     {
         return [
-            [2, 4, 6],
-            [0, null, '', "foo", false, function () {return "closure";}],
-            ["foo", "bar", "foobar"],
-            ["foo", 20, '', 10.404, null, true, ["foo", "bar"], (new \stdClass())]
+            [2, 4, 6, 4],
+            [0, null, '', "foo", false, function () {return "closure";}, 7],
+            ["foo", "bar", "foobar", 4],
+            ["foo", 20, '', 10.404, null, true, ["foo", "bar"], (new \stdClass()), 9]
         ];
     }
 }
