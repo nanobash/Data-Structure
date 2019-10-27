@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace ProjectX\DataStructure\Test;
 
 use Generator;
-use ProjectX\DataStructure\Stack;
+use ProjectX\DataStructure\Queue;
 
-class StackTest extends AbstractOrderedObjectSequence
+class QueueTest extends AbstractOrderedObjectSequence
 {
     public function setUp(): void
     {
-        $this->seriesOfOrderedObjects = new Stack();
+        $this->seriesOfOrderedObjects = new Queue();
     }
 
     public function tearDown(): void
@@ -30,14 +30,14 @@ class StackTest extends AbstractOrderedObjectSequence
             $this->seriesOfOrderedObjects = null;
         }
 
-        $this->seriesOfOrderedObjects = new Stack($args);
+        $this->seriesOfOrderedObjects = new Queue($args);
 
         $this->assertNotEmpty($this->seriesOfOrderedObjects->getStackItems(), "The seriesOfOrderedObjects is empty!");
         $this->assertSame($args[count($args) - 1], $this->seriesOfOrderedObjects->peek(), "The peek method does not return a correct item!");
         $this->assertSame(count($args), $this->seriesOfOrderedObjects->count(), "The items quantity does not match");
 
-        $this->seriesOfOrderedObjects->pop();
-        array_pop($args);
+        $this->seriesOfOrderedObjects->dequeue();
+        array_shift($args);
 
         $this->assertSame($args, $this->seriesOfOrderedObjects->getStackItems(), "The items do not match!");
     }
@@ -49,7 +49,7 @@ class StackTest extends AbstractOrderedObjectSequence
      * @param mixed $bar
      * @param mixed $fooBar
      */
-    public function testPushNotEmpty($foo, $bar, $fooBar): void
+    public function testEnqueueNotEmpty($foo, $bar, $fooBar): void
     {
         $this->assertNotEmpty($this->seriesOfOrderedObjects->setStackItems([$foo, $bar, $fooBar]), "The stack is empty!");
     }
@@ -59,18 +59,18 @@ class StackTest extends AbstractOrderedObjectSequence
      *
      * @param array ...$args
      */
-    public function testPush(...$args): void
+    public function testEnqueue(...$args): void
     {
         foreach ($args as $arg) {
-            $this->seriesOfOrderedObjects->push($arg);
+            $this->seriesOfOrderedObjects->enqueue($arg);
         }
 
         $this->assertSame($args, $this->seriesOfOrderedObjects->getStackItems(), "The stack does not contain all data!");
     }
 
-    public function testPopReturnsNull(): void
+    public function testDequeueReturnsNull(): void
     {
-        $this->assertNull($this->seriesOfOrderedObjects->pop(), "The stack does not return null!");
+        $this->assertNull($this->seriesOfOrderedObjects->dequeue(), "The stack does not return null!");
     }
 
     /**
@@ -78,14 +78,14 @@ class StackTest extends AbstractOrderedObjectSequence
      *
      * @param mixed ...$args
      */
-    public function testPop(...$args): void
+    public function testDequeue(...$args): void
     {
         $this->seriesOfOrderedObjects->setStackItems($args);
 
-        $actual = array_pop($args);
-        $expected = $this->seriesOfOrderedObjects->pop();
+        $actual = array_shift($args);
+        $expected = $this->seriesOfOrderedObjects->dequeue();
 
-        $this->assertSame($expected, $actual, "The popped off element does not match!");
+        $this->assertSame($expected, $actual, "The dequeue element does not match!");
         $this->assertSame($args, $this->seriesOfOrderedObjects->getStackItems(), "The stack does not correct items!");
     }
 
@@ -98,16 +98,16 @@ class StackTest extends AbstractOrderedObjectSequence
     {
         $this->seriesOfOrderedObjects->setStackItems($args);
 
-        $generator = $this->seriesOfOrderedObjects->lifoGenerator();
+        $generator = $this->seriesOfOrderedObjects->fifoGenerator();
 
         $this->assertInstanceOf(Generator::class, $generator, "The method does not return Generator instance!");
 
-        $length = $this->seriesOfOrderedObjects->count() - 1;
+        $length = 0;
 
         foreach ($generator as $item) {
             $this->assertSame($args[$length], $item, "The Generator does not return items in correct order!");
 
-            --$length;
+            ++$length;
         }
     }
 }

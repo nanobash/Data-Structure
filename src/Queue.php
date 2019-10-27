@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ProjectX\DataStructure;
 
 use Generator;
-use ProjectX\DataStructure\Interfaces\AbstractOrderObjectList;
+use ProjectX\DataStructure\Interfaces\AbstractOrderedObjectSequence;
 use ProjectX\DataStructure\Interfaces\QueueInterface;
 
 /**
@@ -16,15 +16,8 @@ use ProjectX\DataStructure\Interfaces\QueueInterface;
  *
  * @package ProjectX\DataStructure
  */
-class Queue extends AbstractOrderObjectList implements QueueInterface
+class Queue extends AbstractOrderedObjectSequence implements QueueInterface
 {
-    public function __construct(array $items = [])
-    {
-        $this->items = $items;
-
-        $this->count = count($items);
-    }
-
     /**
      * @inheritDoc
      */

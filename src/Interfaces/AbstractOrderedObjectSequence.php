@@ -6,11 +6,18 @@ namespace ProjectX\DataStructure\Interfaces;
 
 use Countable;
 
-abstract class AbstractOrderObjectList implements OrderObjectListInterface, Countable
+abstract class AbstractOrderedObjectSequence implements AbstractOrderedObjectSequenceInterface, Countable
 {
     protected $items = [];
 
     protected $count = 0;
+
+    public function __construct(array $items = [])
+    {
+        $this->items = $items;
+
+        $this->count = count($items);
+    }
 
     /**
      * @inheritDoc
@@ -35,7 +42,7 @@ abstract class AbstractOrderObjectList implements OrderObjectListInterface, Coun
     /**
      * @inheritDoc
      */
-    public function setStackItems(array $items): OrderObjectListInterface
+    public function setStackItems(array $items): AbstractOrderedObjectSequenceInterface
     {
         $this->items = array_merge($this->items, $items);
 
@@ -47,7 +54,7 @@ abstract class AbstractOrderObjectList implements OrderObjectListInterface, Coun
     /**
      * @inheritDoc
      */
-    public function reverseStack(): OrderObjectListInterface
+    public function reverseStack(): AbstractOrderedObjectSequenceInterface
     {
         $this->items = array_reverse($this->items);
 

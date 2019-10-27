@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ProjectX\DataStructure;
 
 use Generator;
-use ProjectX\DataStructure\Interfaces\AbstractOrderObjectList;
+use ProjectX\DataStructure\Interfaces\AbstractOrderedObjectSequence;
 use ProjectX\DataStructure\Interfaces\StackInterface;
 
 /**
@@ -20,15 +20,8 @@ use ProjectX\DataStructure\Interfaces\StackInterface;
  *
  * @package ProjectX\DataStructure
  */
-class Stack extends AbstractOrderObjectList implements StackInterface
+class Stack extends AbstractOrderedObjectSequence implements StackInterface
 {
-    public function __construct(array $items = [])
-    {
-        $this->items = $items;
-
-        $this->count = count($items);
-    }
-
     /**
      * @inheritDoc
      */

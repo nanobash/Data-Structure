@@ -28,7 +28,7 @@ interface Countable
     + count(): int
 }
 
-abstract class AbstractOrderObjectList
+abstract class AbstractOrderedObjectSequence
 {
     .. Protected Properties ..
     # items: array
@@ -79,10 +79,10 @@ class Queue
     + dequeue()
 }
 
-Countable <- AbstractOrderObjectList
-OrderObjectListInterface <-- AbstractOrderObjectList
-AbstractOrderObjectList <--- StackInterface
-AbstractOrderObjectList <--- QueueInterface
+Countable <- AbstractOrderedObjectSequence
+OrderObjectListInterface <-- AbstractOrderedObjectSequence
+AbstractOrderedObjectSequence <--- StackInterface
+AbstractOrderedObjectSequence <--- QueueInterface
 StackInterface <-- Stack
 QueueInterface <-- Queue
 

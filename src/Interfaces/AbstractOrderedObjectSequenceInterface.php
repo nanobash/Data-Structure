@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ProjectX\DataStructure\Interfaces;
 
-interface OrderObjectListInterface
+interface AbstractOrderedObjectSequenceInterface
 {
     /**
      * Returns item from the end of the stack without popping it off.

@@ -34,8 +34,8 @@
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-<!--            <directory suffix=".php">./src</directory>-->
-            <file>./src/Stack.php</file>
+            <directory suffix=".php">./tests</directory>
+<!--            <file>./src/Stack.php</file>-->
 <!--            <exclude>-->
 <!--                <directory suffix=".php">/path/to/files</directory>-->
 <!--                <file>/path/to/file</file>-->
