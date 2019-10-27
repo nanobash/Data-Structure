@@ -21,6 +21,8 @@ class Queue extends AbstractOrderObjectList implements QueueInterface
     public function __construct(array $items = [])
     {
         $this->items = $items;
+
+        $this->count = count($items);
     }
 
     /**
@@ -40,7 +42,13 @@ class Queue extends AbstractOrderObjectList implements QueueInterface
      */
     public function dequeue()
     {
+        if ($this->isEmpty()) {
+            return null;
+        }
 
+        --$this->count;
+
+        return array_shift($this->items);
     }
 
     /**
