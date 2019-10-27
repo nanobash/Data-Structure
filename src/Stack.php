@@ -30,21 +30,6 @@ class Stack implements StackInterface
         $this->items = $items;
     }
 
-    public function __toString()
-    {
-        $result = '';
-
-        foreach ($this->items as $item) {
-            if (is_object($item) || is_array($item)) {
-                continue;
-            } else {
-                $result .= $item . ", ";
-            }
-        }
-
-        return rtrim($result, ', ');
-    }
-
     /**
      * @inheritDoc
      */
