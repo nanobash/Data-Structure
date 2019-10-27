@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ProjectX\DataStructure;
 
 use Generator;
+use ProjectX\DataStructure\Interfaces\AbstractOrderObjectList;
 use ProjectX\DataStructure\Interfaces\StackInterface;
 
 /**
@@ -19,27 +20,11 @@ use ProjectX\DataStructure\Interfaces\StackInterface;
  *
  * @package ProjectX\DataStructure
  */
-class Stack implements StackInterface
+class Stack extends AbstractOrderObjectList implements StackInterface
 {
-    private $items = [];
-
-    private $count = 0;
-
     public function __construct(array $items = [])
     {
         $this->items = $items;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function push($item): StackInterface
-    {
-        $this->items[] = $item;
-
-        ++$this->count;
-
-        return $this;
     }
 
     /**
@@ -59,68 +44,10 @@ class Stack implements StackInterface
     /**
      * @inheritDoc
      */
-    public function peek()
-    {
-        if ($this->isEmpty()) {
-            return null;
-        }
-
-        return $this->items[$this->getCount() - 1];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getStackItems(): array
-    {
-        return $this->items;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setStackItems(array $items): StackInterface
-    {
-        $this->items = array_merge($this->items, $items);
-
-        $this->count += count($items);
-
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function reverseStack(): StackInterface
-    {
-        $this->items = array_reverse($this->items);
-
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function lifoGenerator(): Generator
     {
         foreach ($this->reverseStack()->getStackItems() as $item) {
             yield $item;
         }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isEmpty(): bool
-    {
-        return [] === $this->items;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getCount(): int
-    {
-        return $this->count;
     }
 }

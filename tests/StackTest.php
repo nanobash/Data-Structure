@@ -81,7 +81,7 @@ class StackTest extends TestCase
     {
         $this->stack->setStackItems($args);
 
-        $this->assertSame($args[$this->stack->getCount() - 1], $this->stack->peek(), "The peek() method does not return last item!");
+        $this->assertSame($args[$this->stack->count() - 1], $this->stack->peek(), "The peek() method does not return last item!");
     }
 
     /**
@@ -123,7 +123,7 @@ class StackTest extends TestCase
 
         $this->assertInstanceOf(Generator::class, $generator, "The method does not return Generator instance!");
 
-        $length = $this->stack->getCount() - 1;
+        $length = $this->stack->count() - 1;
 
         foreach ($generator as $item) {
             $this->assertSame($args[$length], $item, "The Generator does not return items in correct order!");
@@ -151,7 +151,7 @@ class StackTest extends TestCase
         $this->stack->setStackItems($args);
         $this->stack->pop();
 
-        $this->assertSame($args[$length - 1] + 7, $this->stack->getCount());
+        $this->assertSame($args[$length - 1] + 7, $this->stack->count());
     }
 
     /**

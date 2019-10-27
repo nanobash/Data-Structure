@@ -1,0 +1,89 @@
+@startuml
+
+/'
+    Simple UML (Unified Modeling Language)
+'/
+
+skinparam titleBorderRoundCorner 20
+skinparam titleBorderThickness 2
+skinparam titleBorderColor #A80036
+skinparam titleBackgroundColor white
+
+title Stack & Queue
+
+interface OrderObjectListInterface
+{
+    .. Getters ..
+    + push(): OrderObjectListInterface
+    + peek()
+    + getStackItems(): array
+    + setStackItems(): OrderObjectListInterface
+    + reverseStack(): OrderObjectListInterface
+    + isEmpty(): bool
+}
+
+interface Countable
+{
+    .. Getters ..
+    + count(): int
+}
+
+abstract class AbstractOrderObjectList
+{
+    .. Protected Properties ..
+    # items: array
+    # count: int
+
+    .. Getters ..
+    + push(): OrderObjectListInterface
+    + peek()
+    + getStackItems(): array
+    + setStackItems(): OrderObjectListInterface
+    + reverseStack(): OrderObjectListInterface
+    + isEmpty(): bool
+    + count(): int
+}
+
+interface StackInterface
+{
+    .. Getters ..
+    + lifoGenerator(): Generator
+}
+
+interface QueueInterface
+{
+    .. Getters ..
+    + fifoGenerator(): Generator
+
+    .. Methods ..
+    + enqueue()
+    + dequeue(): QueueInterface
+}
+
+class Stack
+{
+    .. Getters ..
+    + lifoGenerator(): Generator
+
+    .. Methods ..
+    + pop()
+}
+
+class Queue
+{
+    .. Getters ..
+    + fifoGenerator(): Generator
+
+    .. Methods ..
+    + enqueue()
+    + dequeue(): QueueInterface
+}
+
+Countable <- AbstractOrderObjectList
+OrderObjectListInterface <-- AbstractOrderObjectList
+AbstractOrderObjectList <--- StackInterface
+AbstractOrderObjectList <--- QueueInterface
+StackInterface <-- Stack
+QueueInterface <-- Queue
+
+@enduml
