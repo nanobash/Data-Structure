@@ -61,6 +61,47 @@ class AbstractOrderedObjectSequence extends TestCase
         $this->assertEmpty($this->seriesOfOrderedObjects->getStackitems(), "The stack is not empty!");
     }
 
+    public function testOffsetShouldNotExist(): void
+    {
+        $this->seriesOfOrderedObjects->setStackItems(["foo", "bar", "fooBar"]);
+
+        $this->assertNotTrue($this->seriesOfOrderedObjects->offsetExists(3), "The offset 3 should not exist!");
+        $this->assertNull($this->seriesOfOrderedObjects->offsetGet(3), "The offset 3 should not retrieve an item!");
+    }
+
+    public function testOffsetShouldExist()
+    {
+        $this->seriesOfOrderedObjects->setStackItems(["foo", "bar", "fooBar"]);
+
+        $this->assertTrue($this->seriesOfOrderedObjects->offsetExists(0), "The offset 0 should exist!");
+        $this->assertSame("foo", $this->seriesOfOrderedObjects->offsetGet(0), "The item should be 'foo'!");
+        $this->assertSame("bar", $this->seriesOfOrderedObjects->offsetGet(1), "The item should be 'bar'!");
+        $this->assertSame("fooBar", $this->seriesOfOrderedObjects->offsetGet(2), "The item should be 'fooBar'!");
+    }
+
+    public function testOffsetSetAndUnset()
+    {
+        $this
+            ->seriesOfOrderedObjects
+            ->offsetSet(0, "foo")
+            ->offsetSet(1, "bar")
+            ->offsetSet(2, "fooBar");
+
+        $this
+            ->seriesOfOrderedObjects
+            ->offsetUnset(0)
+            ->offsetUnset(1)
+            ->offsetUnset(2);
+
+        $this->assertNotTrue($this->seriesOfOrderedObjects->offsetExists(0));
+        $this->assertNotTrue($this->seriesOfOrderedObjects->offsetExists(1));
+        $this->assertNotTrue($this->seriesOfOrderedObjects->offsetExists(2));
+
+        $this->assertNull($this->seriesOfOrderedObjects->offsetGet(0), "The item should not exist, and should be a null!");
+        $this->assertNull($this->seriesOfOrderedObjects->offsetGet(1), "The item should not exist, and should be a null!");
+        $this->assertNull($this->seriesOfOrderedObjects->offsetGet(2), "The item should not exist, and should be a null!");
+    }
+
     /**
      * @dataProvider itemsProvider
      *

@@ -28,6 +28,19 @@ interface Countable
     + count(): int
 }
 
+interface ArrayAccess
+{
+    .. Getters ..
+    + offsetGet($offset)
+
+    .. Setters ..
+    + offsetSet($offset, $value): AbstractOrderedObjectSequence
+    + offsetUnset($offset): AbstractOrderedObjectSequence
+
+    .. Other Methods ..
+    + offsetExists($offset): bool
+}
+
 abstract class AbstractOrderedObjectSequence
 {
     .. Protected Properties ..
@@ -55,7 +68,7 @@ interface QueueInterface
     .. Getters ..
     + fifoGenerator(): Generator
 
-    .. Methods ..
+    .. Other Methods ..
     + enqueue($item): QueueInterface
     + dequeue()
 }
@@ -65,7 +78,7 @@ class Stack
     .. Getters ..
     + lifoGenerator(): Generator
 
-    .. Methods ..
+    .. Other Methods ..
     + pop()
 }
 
@@ -74,13 +87,14 @@ class Queue
     .. Getters ..
     + fifoGenerator(): Generator
 
-    .. Methods ..
+    .. Other Methods ..
     + enqueue($item): QueueInterface
     + dequeue()
 }
 
 Countable <- AbstractOrderedObjectSequence
-OrderObjectListInterface <-- AbstractOrderedObjectSequence
+ArrayAccess <--- AbstractOrderedObjectSequence
+OrderObjectListInterface <--- AbstractOrderedObjectSequence
 AbstractOrderedObjectSequence <--- StackInterface
 AbstractOrderedObjectSequence <--- QueueInterface
 StackInterface <-- Stack
