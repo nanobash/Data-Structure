@@ -15,18 +15,6 @@ abstract class AbstractOrderObjectList implements OrderObjectListInterface, Coun
     /**
      * @inheritDoc
      */
-    public function push($item): OrderObjectListInterface
-    {
-        $this->items[] = $item;
-
-        ++$this->count;
-
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function peek()
     {
         if ($this->isEmpty()) {

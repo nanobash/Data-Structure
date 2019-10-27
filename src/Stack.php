@@ -25,6 +25,20 @@ class Stack extends AbstractOrderObjectList implements StackInterface
     public function __construct(array $items = [])
     {
         $this->items = $items;
+
+        $this->count = count($items);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function push($item): StackInterface
+    {
+        $this->items[] = $item;
+
+        ++$this->count;
+
+        return $this;
     }
 
     /**

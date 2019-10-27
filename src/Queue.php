@@ -26,6 +26,26 @@ class Queue extends AbstractOrderObjectList implements QueueInterface
     /**
      * @inheritDoc
      */
+    public function enqueue($item): QueueInterface
+    {
+        $this->items[] = $item;
+
+        ++$this->count;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function dequeue()
+    {
+
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function fifoGenerator(): Generator
     {
         foreach ($this->getStackItems() as $item) {

@@ -25,6 +25,27 @@ class StackTest extends TestCase
     /**
      * @dataProvider itemsProvider
      *
+     * @param mixed ...$args
+     */
+    public function testStackConstructor(...$args)
+    {
+        if (null !== $this->stack) {
+            $this->stack = null;
+        }
+
+        $this->stack = new Stack($args);
+
+        $this->assertNotEmpty($this->stack->getStackItems(), "The stack is empty!");
+        $this->assertSame($args[count($args) - 1], $this->stack->peek(), "The peek method does not return a correct item!");
+        $this->assertSame(count($args), $this->stack->count(), "The items quantity does not match");
+        $this->stack->pop();
+        array_pop($args);
+        $this->assertSame($args, $this->stack->getStackItems(), "The items do not match!");
+    }
+
+    /**
+     * @dataProvider itemsProvider
+     *
      * @param mixed $foo
      * @param mixed $bar
      * @param mixed $fooBar

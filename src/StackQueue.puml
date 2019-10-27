@@ -14,10 +14,10 @@ title Stack & Queue
 interface OrderObjectListInterface
 {
     .. Getters ..
-    + push(): OrderObjectListInterface
+    + push($item): OrderObjectListInterface
     + peek()
     + getStackItems(): array
-    + setStackItems(): OrderObjectListInterface
+    + setStackItems(array $items): OrderObjectListInterface
     + reverseStack(): OrderObjectListInterface
     + isEmpty(): bool
 }
@@ -35,10 +35,10 @@ abstract class AbstractOrderObjectList
     # count: int
 
     .. Getters ..
-    + push(): OrderObjectListInterface
+    + push($item): OrderObjectListInterface
     + peek()
     + getStackItems(): array
-    + setStackItems(): OrderObjectListInterface
+    + setStackItems(array $items): OrderObjectListInterface
     + reverseStack(): OrderObjectListInterface
     + isEmpty(): bool
     + count(): int
@@ -56,8 +56,8 @@ interface QueueInterface
     + fifoGenerator(): Generator
 
     .. Methods ..
-    + enqueue()
-    + dequeue(): QueueInterface
+    + enqueue($item): QueueInterface
+    + dequeue()
 }
 
 class Stack
@@ -75,8 +75,8 @@ class Queue
     + fifoGenerator(): Generator
 
     .. Methods ..
-    + enqueue()
-    + dequeue(): QueueInterface
+    + enqueue($item): QueueInterface
+    + dequeue()
 }
 
 Countable <- AbstractOrderObjectList

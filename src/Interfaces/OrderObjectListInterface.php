@@ -7,15 +7,6 @@ namespace ProjectX\DataStructure\Interfaces;
 interface OrderObjectListInterface
 {
     /**
-     * Pushes item to the stack.
-     *
-     * @param $item
-     *
-     * @return $this
-     */
-    public function push($item): self;
-
-    /**
      * Returns item from the end of the stack without popping it off.
      *
      * @return mixed
