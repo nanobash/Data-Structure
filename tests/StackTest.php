@@ -23,6 +23,22 @@ class StackTest extends TestCase
     }
 
     /**
+     * @dataProvider itemsProviderForToString
+     *
+     * @param mixed $args
+     */
+    public function testToString(...$args): void
+    {
+        $expected = array_pop($args);
+
+        $this->stack->setStackItems($args);
+
+        $this->expectOutputString($expected);
+
+        echo $this->stack;
+    }
+
+    /**
      * @dataProvider itemsProvider
      *
      * @param mixed $foo
@@ -152,6 +168,20 @@ class StackTest extends TestCase
         $this->stack->pop();
 
         $this->assertSame($args[$length - 1] + 7, $this->stack->getCount());
+    }
+
+    /**
+     * @return array
+     */
+    public function itemsProviderForToString()
+    {
+        return [
+            [true, 2, 4.5, "1, 2, 4.5"],
+            [false, null, '', ''],
+            ["foo", "bar", "foo, bar"],
+            [new Stack(), [], 10, false, "10"],
+            [new \stdClass(), function () {}, 100, "fooBar", null, true, "100, fooBar, , 1"],
+        ];
     }
 
     /**

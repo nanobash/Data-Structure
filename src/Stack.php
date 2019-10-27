@@ -32,7 +32,17 @@ class Stack implements StackInterface
 
     public function __toString()
     {
-        return implode(', ', $this->items);
+        $result = '';
+
+        foreach ($this->items as $item) {
+            if (is_object($item) || is_array($item)) {
+                continue;
+            } else {
+                $result .= $item . ", ";
+            }
+        }
+
+        return rtrim($result, ', ');
     }
 
     /**
