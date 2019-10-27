@@ -31,4 +31,25 @@
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+<!--            <directory suffix=".php">./src</directory>-->
+            <file>./src/Stack.php</file>
+<!--            <exclude>-->
+<!--                <directory suffix=".php">/path/to/files</directory>-->
+<!--                <file>/path/to/file</file>-->
+<!--            </exclude>-->
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-html" target="./phpunit-coverage/report" lowUpperBound="35" highLowerBound="70"/>
+<!--        <log type="coverage-clover" target="./phpunit-coverage/coverage.xml"/>-->
+<!--        <log type="coverage-php" target="./phpunit-coverage/coverage.serialized"/>-->
+<!--        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>-->
+<!--        <log type="junit" target="./phpunit-coverage/logfile.xml"/>-->
+<!--        <log type="testdox-html" target="./phpunit-coverage/testdox.html"/>-->
+<!--        <log type="testdox-text" target="./phpunit-coverage/testdox.txt"/>-->
+    </logging>
 </phpunit>
