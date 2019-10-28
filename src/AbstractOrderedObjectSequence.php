@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace ProjectX\DataStructure\Interfaces;
+namespace ProjectX\DataStructure;
 
 use ArrayAccess;
 use Countable;
+use ProjectX\DataStructure\Interfaces\AbstractOrderedObjectSequenceInterface;
 
 abstract class AbstractOrderedObjectSequence implements AbstractOrderedObjectSequenceInterface, ArrayAccess, Countable
 {
