@@ -26,11 +26,7 @@ abstract class AbstractOrderedObjectSequence implements AbstractOrderedObjectSeq
      */
     public function peek()
     {
-        if ($this->isEmpty()) {
-            return null;
-        }
-
-        return $this->items[$this->count - 1];
+        return $this->items[$this->count - 1] ?? null;
     }
 
     /**

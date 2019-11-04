@@ -34,10 +34,6 @@ class Queue extends AbstractOrderedObjectSequence implements QueueInterface
      */
     public function dequeue()
     {
-        if ($this->isEmpty()) {
-            return null;
-        }
-
         --$this->count;
 
         return array_shift($this->items);

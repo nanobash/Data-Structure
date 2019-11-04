@@ -15,7 +15,7 @@ class AbstractOrderedObjectSequence extends TestCase
 
     public function testPeekReturnsNull(): void
     {
-        $this->assertNull($this->seriesOfOrderedObjects->peek(), "The stack does not return null!");
+        $this->assertNull($this->seriesOfOrderedObjects->peek(), "The ordered object sequence does not return null!");
     }
 
     /**
@@ -39,7 +39,8 @@ class AbstractOrderedObjectSequence extends TestCase
     {
         $this->seriesOfOrderedObjects->setStackItems($args);
 
-        $this->assertSame($args, $this->seriesOfOrderedObjects->getStackItems(), "The stack does not container correct items!");
+        $this->assertSame($args, $this->seriesOfOrderedObjects->getStackItems(), "The ordered object sequence does not container correct items!");
+        $this->assertNotTrue($this->seriesOfOrderedObjects->isEmpty(), "The ordered objects sequence is not empty!");
     }
 
     /**
@@ -58,7 +59,7 @@ class AbstractOrderedObjectSequence extends TestCase
 
     public function testEmpty(): void
     {
-        $this->assertEmpty($this->seriesOfOrderedObjects->getStackitems(), "The stack is not empty!");
+        $this->assertTrue($this->seriesOfOrderedObjects->isEmpty(), "The ordered object sequence is not empty!");
     }
 
     public function testOffsetShouldNotExist(): void

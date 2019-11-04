@@ -38,10 +38,6 @@ class Stack extends AbstractOrderedObjectSequence implements StackInterface
      */
     public function pop()
     {
-        if ($this->isEmpty()) {
-            return null;
-        }
-
         --$this->count;
 
         return array_pop($this->items);

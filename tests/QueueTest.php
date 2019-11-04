@@ -66,6 +66,7 @@ class QueueTest extends AbstractOrderedObjectSequence
         }
 
         $this->assertSame($args, $this->seriesOfOrderedObjects->getStackItems(), "The stack does not contain all data!");
+        $this->assertSame(count($args), $this->seriesOfOrderedObjects->count(), "Elements quantity of the stack should be: " . count($args));
     }
 
     public function testDequeueReturnsNull(): void
@@ -87,6 +88,7 @@ class QueueTest extends AbstractOrderedObjectSequence
 
         $this->assertSame($expected, $actual, "The dequeue element does not match!");
         $this->assertSame($args, $this->seriesOfOrderedObjects->getStackItems(), "The stack does not correct items!");
+        $this->assertSame(count($args), $this->seriesOfOrderedObjects->count(), "Elements quantity of the stack should be: " . count($args));
     }
 
     /**
