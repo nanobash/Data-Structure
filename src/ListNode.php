@@ -48,7 +48,9 @@ class ListNode implements ListNodeInterface
     {
         $this->data = $data;
 
-        ++$this->count;
+        if (null !== $data) {
+            ++$this->count;
+        }
 
         return $this;
     }
