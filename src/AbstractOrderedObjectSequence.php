@@ -88,6 +88,8 @@ abstract class AbstractOrderedObjectSequence implements AbstractOrderedObjectSeq
      */
     public function offsetSet($offset, $value): self
     {
+        ++$this->count;
+
         $this->items[$offset] = $value;
 
         return $this;

@@ -88,6 +88,11 @@ class AbstractOrderedObjectSequence extends TestCase
             ->offsetSet(1, "bar")
             ->offsetSet(2, "fooBar");
 
+        $this->assertSame(3, $this->seriesOfOrderedObjects->count(), "The number of sequence elements should be 3!");
+        $this->assertSame("foo", $this->seriesOfOrderedObjects->offsetGet(0), "The element should be 'foo'!");
+        $this->assertSame("bar", $this->seriesOfOrderedObjects->offsetGet(1), "The element should be 'bar'!");
+        $this->assertSame("fooBar", $this->seriesOfOrderedObjects->offsetGet(2), "The element should be 'fooBar'!");
+
         $this
             ->seriesOfOrderedObjects
             ->offsetUnset(0)
