@@ -25,7 +25,7 @@ class AbstractOrderedObjectSequence extends TestCase
      */
     public function testPeek(...$args): void
     {
-        $this->seriesOfOrderedObjects->setStackItems($args);
+        $this->seriesOfOrderedObjects->setSequenceItems($args);
 
         $this->assertSame($args[$this->seriesOfOrderedObjects->count() - 1], $this->seriesOfOrderedObjects->peek(), "The peek() method does not return last item!");
     }
@@ -37,9 +37,9 @@ class AbstractOrderedObjectSequence extends TestCase
      */
     public function testGetAndSetItems(...$args): void
     {
-        $this->seriesOfOrderedObjects->setStackItems($args);
+        $this->seriesOfOrderedObjects->setSequenceItems($args);
 
-        $this->assertSame($args, $this->seriesOfOrderedObjects->getStackItems(), "The ordered object sequence does not container correct items!");
+        $this->assertSame($args, $this->seriesOfOrderedObjects->getSequenceItems(), "The ordered object sequence does not container correct items!");
         $this->assertNotTrue($this->seriesOfOrderedObjects->isEmpty(), "The ordered objects sequence is not empty!");
     }
 
@@ -50,11 +50,11 @@ class AbstractOrderedObjectSequence extends TestCase
      */
     public function testReverseStack(...$args): void
     {
-        $this->seriesOfOrderedObjects->setStackItems($args);
+        $this->seriesOfOrderedObjects->setSequenceItems($args);
 
-        $expected = array_reverse($this->seriesOfOrderedObjects->getStackItems());
+        $expected = array_reverse($this->seriesOfOrderedObjects->getSequenceItems());
 
-        $this->assertSame($expected, $this->seriesOfOrderedObjects->reverseStack()->getStackItems(), "The reversed stack is incorrect!");
+        $this->assertSame($expected, $this->seriesOfOrderedObjects->reverseSequence()->getSequenceItems(), "The reversed stack is incorrect!");
     }
 
     public function testEmpty(): void
@@ -64,7 +64,7 @@ class AbstractOrderedObjectSequence extends TestCase
 
     public function testOffsetShouldNotExist(): void
     {
-        $this->seriesOfOrderedObjects->setStackItems(["foo", "bar", "fooBar"]);
+        $this->seriesOfOrderedObjects->setSequenceItems(["foo", "bar", "fooBar"]);
 
         $this->assertNotTrue($this->seriesOfOrderedObjects->offsetExists(3), "The offset 3 should not exist!");
         $this->assertNull($this->seriesOfOrderedObjects->offsetGet(3), "The offset 3 should not retrieve an item!");
@@ -72,7 +72,7 @@ class AbstractOrderedObjectSequence extends TestCase
 
     public function testOffsetShouldExist()
     {
-        $this->seriesOfOrderedObjects->setStackItems(["foo", "bar", "fooBar"]);
+        $this->seriesOfOrderedObjects->setSequenceItems(["foo", "bar", "fooBar"]);
 
         $this->assertTrue($this->seriesOfOrderedObjects->offsetExists(0), "The offset 0 should exist!");
         $this->assertSame("foo", $this->seriesOfOrderedObjects->offsetGet(0), "The item should be 'foo'!");
@@ -112,8 +112,8 @@ class AbstractOrderedObjectSequence extends TestCase
     {
         $length = count($args);
 
-        $this->seriesOfOrderedObjects->setStackItems([1, true, '', (new \stdClass()), 1.4, function() {}, "/stuff/"]);
-        $this->seriesOfOrderedObjects->setStackItems($args);
+        $this->seriesOfOrderedObjects->setSequenceItems([1, true, '', (new \stdClass()), 1.4, function() {}, "/stuff/"]);
+        $this->seriesOfOrderedObjects->setSequenceItems($args);
 
         $this->assertSame($args[$length - 1] + 7, $this->seriesOfOrderedObjects->count());
     }

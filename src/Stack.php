@@ -48,7 +48,7 @@ class Stack extends AbstractOrderedObjectSequence implements StackInterface
      */
     public function lifoGenerator(): Generator
     {
-        foreach ($this->reverseStack()->getStackItems() as $item) {
+        foreach ($this->reverseSequence()->getSequenceItems() as $item) {
             yield $item;
         }
     }

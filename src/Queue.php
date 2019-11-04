@@ -44,7 +44,7 @@ class Queue extends AbstractOrderedObjectSequence implements QueueInterface
      */
     public function fifoGenerator(): Generator
     {
-        foreach ($this->getStackItems() as $item) {
+        foreach ($this->getSequenceItems() as $item) {
             yield $item;
         }
     }

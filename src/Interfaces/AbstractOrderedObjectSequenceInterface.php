@@ -18,7 +18,7 @@ interface AbstractOrderedObjectSequenceInterface
      *
      * @return array
      */
-    public function getStackItems(): array;
+    public function getSequenceItems(): array;
 
     /**
      * Sets items to the stack items list.
@@ -27,14 +27,14 @@ interface AbstractOrderedObjectSequenceInterface
      *
      * @return $this
      */
-    public function setStackItems(array $items): self;
+    public function setSequenceItems(array $items): self;
 
     /**
      * Reverse the items of the stack.
      *
      * @return $this
      */
-    public function reverseStack(): self;
+    public function reverseSequence(): self;
 
     /**
      * Returns bool based on whether the stack is empty or not.

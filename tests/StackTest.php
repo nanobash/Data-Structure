@@ -32,14 +32,14 @@ class StackTest extends AbstractOrderedObjectSequence
 
         $this->seriesOfOrderedObjects = new Stack($args);
 
-        $this->assertNotEmpty($this->seriesOfOrderedObjects->getStackItems(), "The seriesOfOrderedObjects is empty!");
+        $this->assertNotEmpty($this->seriesOfOrderedObjects->getSequenceItems(), "The seriesOfOrderedObjects is empty!");
         $this->assertSame($args[count($args) - 1], $this->seriesOfOrderedObjects->peek(), "The peek method does not return a correct item!");
         $this->assertSame(count($args), $this->seriesOfOrderedObjects->count(), "The items quantity does not match");
 
         $this->seriesOfOrderedObjects->pop();
         array_pop($args);
 
-        $this->assertSame($args, $this->seriesOfOrderedObjects->getStackItems(), "The items do not match!");
+        $this->assertSame($args, $this->seriesOfOrderedObjects->getSequenceItems(), "The items do not match!");
     }
 
     /**
@@ -51,7 +51,7 @@ class StackTest extends AbstractOrderedObjectSequence
      */
     public function testPushNotEmpty($foo, $bar, $fooBar): void
     {
-        $this->assertNotEmpty($this->seriesOfOrderedObjects->setStackItems([$foo, $bar, $fooBar]), "The stack is empty!");
+        $this->assertNotEmpty($this->seriesOfOrderedObjects->setSequenceItems([$foo, $bar, $fooBar]), "The stack is empty!");
     }
 
     /**
@@ -65,7 +65,7 @@ class StackTest extends AbstractOrderedObjectSequence
             $this->seriesOfOrderedObjects->push($arg);
         }
 
-        $this->assertSame($args, $this->seriesOfOrderedObjects->getStackItems(), "The stack does not contain all data!");
+        $this->assertSame($args, $this->seriesOfOrderedObjects->getSequenceItems(), "The stack does not contain all data!");
         $this->assertSame(count($args), $this->seriesOfOrderedObjects->count(), "Elements quantity of the stack should be: " . count($args));
     }
 
@@ -81,13 +81,13 @@ class StackTest extends AbstractOrderedObjectSequence
      */
     public function testPop(...$args): void
     {
-        $this->seriesOfOrderedObjects->setStackItems($args);
+        $this->seriesOfOrderedObjects->setSequenceItems($args);
 
         $actual = array_pop($args);
         $expected = $this->seriesOfOrderedObjects->pop();
 
         $this->assertSame($expected, $actual, "The popped off element does not match!");
-        $this->assertSame($args, $this->seriesOfOrderedObjects->getStackItems(), "The stack does not correct items!");
+        $this->assertSame($args, $this->seriesOfOrderedObjects->getSequenceItems(), "The stack does not correct items!");
         $this->assertSame(count($args), $this->seriesOfOrderedObjects->count(), "Elements quantity of the stack should be: " . count($args));
     }
 
@@ -98,7 +98,7 @@ class StackTest extends AbstractOrderedObjectSequence
      */
     public function testLifoGenerator(...$args): void
     {
-        $this->seriesOfOrderedObjects->setStackItems($args);
+        $this->seriesOfOrderedObjects->setSequenceItems($args);
 
         $generator = $this->seriesOfOrderedObjects->lifoGenerator();
 

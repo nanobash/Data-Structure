@@ -32,7 +32,7 @@ abstract class AbstractOrderedObjectSequence implements AbstractOrderedObjectSeq
     /**
      * @inheritDoc
      */
-    public function getStackItems(): array
+    public function getSequenceItems(): array
     {
         return $this->items;
     }
@@ -40,7 +40,7 @@ abstract class AbstractOrderedObjectSequence implements AbstractOrderedObjectSeq
     /**
      * @inheritDoc
      */
-    public function setStackItems(array $items): AbstractOrderedObjectSequenceInterface
+    public function setSequenceItems(array $items): AbstractOrderedObjectSequenceInterface
     {
         $this->items = array_merge($this->items, $items);
 
@@ -52,7 +52,7 @@ abstract class AbstractOrderedObjectSequence implements AbstractOrderedObjectSeq
     /**
      * @inheritDoc
      */
-    public function reverseStack(): AbstractOrderedObjectSequenceInterface
+    public function reverseSequence(): AbstractOrderedObjectSequenceInterface
     {
         $this->items = array_reverse($this->items);
 
@@ -80,11 +80,7 @@ abstract class AbstractOrderedObjectSequence implements AbstractOrderedObjectSeq
      */
     public function offsetGet($offset)
     {
-        if (!$this->offsetExists($offset)) {
-            return null;
-        }
-
-        return $this->items[$offset];
+        return $this->items[$offset] ?? null;
     }
 
     /**
