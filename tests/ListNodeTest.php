@@ -39,29 +39,38 @@ class ListNodeTest extends TestCase
         $this->assertSame($data, $this->node->getData());
     }
 
-    public function testSetDataGetDataAndCount()
+    /**
+     * @dataProvider listNodeProvider
+     *
+     * @param mixed $data
+     */
+    public function testSetDataGetDataAndCount($data)
     {
-        $this->node->setData("foo");
+        $this->node->setData($data);
 
-        $this->assertNotNull($this->node->getData());
-        $this->assertSame("foo", $this->node->getData());
-        $this->assertSame(1, $this->node->count());
+        if (null === $data) {
+            $this->assertNull($this->node->getData());
+        } else {
+            $this->assertNotNull($this->node->getData());
+        }
+
+        $this->assertSame($data, $this->node->getData());
+        $this->assertSame(null === $data ? 0 : 1, $this->node->count());
         $this->assertSame(null, $this->node->getInsertOrderIndex());
     }
 
     public function listNodeProvider(): array
     {
         return [
+            [function () {return new \stdClass();}],
             [null],
+            [25],
+            ["foo"],
             [true],
             [0],
             [''],
-            ["foo"],
-            [25],
             [40.404],
             [[]],
-            [new \stdClass()],
-            [function () {return "closure";}],
         ];
     }
 }
