@@ -69,7 +69,20 @@ class LinkedListTest extends TestCase
             8 => "singly",
             2 => "map",
             5 => "linkedList",
-        ], $node->getAll());
+        ], $node->getAll(LinkedListInterface::ASC));
+
+        $this->assertSame([
+            5 => "linkedList",
+            2 => "map",
+            8 => "singly",
+            9 => "binary",
+            1 => "set",
+            10 => "queue",
+            3 => "hashMap",
+            4 => "stack",
+            7 => "doubly",
+            6 => "heaps",
+        ], $node->getAll(LinkedListInterface::DESC));
 
         $this->assertNotNull($node->getHead());
         $this->assertNotNull($node->getTail());
