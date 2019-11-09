@@ -58,7 +58,7 @@ class ListNodeTest extends TestCase
 
         $this->assertSame($data, $this->node->getData());
         $this->assertSame(null === $data ? 0 : 1, $this->node->count());
-        $this->assertSame(null, $this->node->getInsertOrderIndex());
+        $this->assertSame(1, $this->node->getOrderIndex());
     }
 
     /**
@@ -99,12 +99,12 @@ class ListNodeTest extends TestCase
     public function testSetInsertOrderIndex()
     {
         $reflection = new ReflectionClass($this->node);
-        $method = $reflection->getMethod("setInsertOrderIndex");
+        $method = $reflection->getMethod("setOrderIndex");
         $method->setAccessible(true);
 
         $method->invoke($this->node, 9);
 
-        $this->assertSame(10, $this->node->getInsertOrderIndex());
+        $this->assertSame(9, $this->node->getOrderIndex());
     }
 
     public function listNodeProvider(): array

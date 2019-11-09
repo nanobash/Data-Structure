@@ -18,7 +18,7 @@ class ListNode implements ListNodeInterface
     private $previous = null;
 
     /** @var int|null */
-    private $insertOrderIndex = null;
+    private $orderIndex = 1;
 
     /** @var int */
     private $count = 0;
@@ -74,9 +74,9 @@ class ListNode implements ListNodeInterface
     /**
      * @return int|null
      */
-    public function getInsertOrderIndex(): ?int
+    public function getOrderIndex(): int
     {
-        return $this->insertOrderIndex;
+        return $this->orderIndex;
     }
 
     /**
@@ -112,13 +112,37 @@ class ListNode implements ListNodeInterface
     }
 
     /**
-     * @param int $insertOrderIndex
+     * @param int $orderIndex
      *
      * @return ListNode
      */
-    protected function setInsertOrderIndex(int $insertOrderIndex): ListNode
+    protected function setOrderIndex(int $orderIndex): ListNode
     {
-        $this->insertOrderIndex = $insertOrderIndex + 1;
+        $this->orderIndex = $orderIndex;
+
+        return $this;
+    }
+
+    /**
+     * Increases order index of the linkedList element.
+     *
+     * @return ListNode
+     */
+    protected function increaseOrderIndex(): ListNode
+    {
+        ++$this->orderIndex;
+
+        return $this;
+    }
+
+    /**
+     * Increases count parameter.
+     *
+     * @return ListNode
+     */
+    protected function increaseCount(): ListNode
+    {
+        ++$this->count;
 
         return $this;
     }

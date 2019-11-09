@@ -6,14 +6,13 @@ namespace ProjectX\DataStructure\Interfaces;
 
 use ProjectX\DataStructure\LinkedList;
 use ProjectX\DataStructure\ListNode;
-use Countable;
 
 /**
  * Doubly LinkedList interface.
  *
  * @package ProjectX\DataStructure\Interfaces
  */
-interface LinkedListInterface extends Countable
+interface LinkedListInterface
 {
     public const ASC = 1;
 
@@ -32,13 +31,6 @@ interface LinkedListInterface extends Countable
      * @return ListNode|null
      */
     public function getTail(): ?ListNode;
-
-    /**
-     * Returns the quantity of the elements of the LinkedList.
-     *
-     * @return int
-     */
-    public function count(): int;
 
     /**
      * @param $data

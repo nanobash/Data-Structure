@@ -92,13 +92,13 @@ class LinkedListTest extends TestCase
             ->getPrevious()
             ->getPrevious()
             ->getPrevious()
-            ->getInsertOrderIndex()
+            ->getOrderIndex()
         );
         $this->assertSame(4, $this->linkedList
             ->getHead()
             ->getNext()
             ->getNext()
-            ->getInsertOrderIndex()
+            ->getOrderIndex()
         );
         $this->assertSame("hashMap", $this->linkedList->find(3, LinkedListInterface::ASC)->getData());
         $this->assertSame("map", $this->linkedList->find(1, LinkedListInterface::DESC)->getData());

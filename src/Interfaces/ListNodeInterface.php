@@ -9,7 +9,7 @@ use ProjectX\DataStructure\ListNode;
 
 interface ListNodeInterface extends Countable
 {
-    public function getInsertOrderIndex(): ?int;
+    public function getOrderIndex(): int;
 
     public function getData();
 

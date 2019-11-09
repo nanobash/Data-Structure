@@ -14,9 +14,6 @@ class LinkedList extends ListNode implements LinkedListInterface
     /** @var ListNode|null */
     private $tail = null;
 
-    /** @var int */
-    private $orderIndex = 0;
-
     /**
      * @param null $data
      */
@@ -52,17 +49,9 @@ class LinkedList extends ListNode implements LinkedListInterface
     /**
      * @inheritDoc
      */
-    public function count(): int
-    {
-        return $this->orderIndex;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function find(int $index = 0, int $order = LinkedListInterface::ASC): ?ListNode
     {
-        if ($index > $this->orderIndex) {
+        if ($index >= $this->count()) {
             return null;
         }
 
@@ -106,9 +95,10 @@ class LinkedList extends ListNode implements LinkedListInterface
             $currentNext->setPrevious($newListNode);
         }
 
-        $newListNode->setInsertOrderIndex($this->orderIndex);
+        $newListNode->setOrderIndex($this->getOrderIndex());
 
-        ++$this->orderIndex;
+        $this->increaseOrderIndex();
+        $this->increaseCount();
 
         return $this;
     }
@@ -121,19 +111,20 @@ class LinkedList extends ListNode implements LinkedListInterface
         $newListNode = new ListNode($data);
 
         $newListNode->setNext($this->head);
-        $newListNode->setInsertOrderIndex($this->orderIndex);
+        $newListNode->setOrderIndex($this->getOrderIndex());
 
         if (null !== $this->head) {
             $this->head->setPrevious($newListNode);
         }
 
-        if (0 === $this->orderIndex) {
+        if (1 === $this->getOrderIndex()) {
             $this->tail = $newListNode;
         }
 
         $this->head = $newListNode;
 
-        ++$this->orderIndex;
+        $this->increaseOrderIndex();
+        $this->increaseCount();
 
         return $this;
     }
@@ -146,19 +137,20 @@ class LinkedList extends ListNode implements LinkedListInterface
         $newListNode = new ListNode($data);
 
         $newListNode->setPrevious($this->tail);
-        $newListNode->setInsertOrderIndex($this->orderIndex);
+        $newListNode->setOrderIndex($this->getOrderIndex());
 
         if (null !== $this->tail) {
             $this->tail->setNext($newListNode);
         }
 
-        if (0 === $this->orderIndex) {
+        if (1 === $this->getOrderIndex()) {
             $this->head = $newListNode;
         }
 
         $this->tail = $newListNode;
 
-        ++$this->orderIndex;
+        $this->increaseOrderIndex();
+        $this->increaseCount();
 
         return $this;
     }
@@ -177,7 +169,7 @@ class LinkedList extends ListNode implements LinkedListInterface
         $pointer = $order === LinkedListInterface::ASC ? $this->head : $this->tail;
 
         do {
-            $list[$pointer->getInsertOrderIndex()] = $pointer->getData();
+            $list[$pointer->getOrderIndex()] = $pointer->getData();
         } while (null !== ($pointer = $order === LinkedListInterface::ASC ? $pointer->getNext() : $pointer->getPrevious()));
 
         return $list;
