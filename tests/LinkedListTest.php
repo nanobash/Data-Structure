@@ -100,7 +100,7 @@ class LinkedListTest extends TestCase
             ->getNext()
             ->getInsertOrderIndex()
         );
-        $this->assertSame("hashMap", $node->find(3)->getData());
+        $this->assertSame("hashMap", $node->find(3, LinkedListInterface::ASC)->getData());
         $this->assertSame("map", $node->find(1, LinkedListInterface::DESC)->getData());
     }
 
