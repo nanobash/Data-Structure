@@ -43,9 +43,7 @@ class LinkedListTest extends TestCase
 
     public function testAddFirstAddLastAddFind()
     {
-        $node = new LinkedList();
-
-        $node
+        $this->linkedList
             ->addFirst("set")
             ->addLast("map")
             ->addFirst("hashMap")
@@ -69,7 +67,7 @@ class LinkedListTest extends TestCase
             8 => "singly",
             2 => "map",
             5 => "linkedList",
-        ], $node->getAll(LinkedListInterface::ASC));
+        ], $this->linkedList->getAll(LinkedListInterface::ASC));
 
         $this->assertSame([
             5 => "linkedList",
@@ -82,26 +80,28 @@ class LinkedListTest extends TestCase
             4 => "stack",
             7 => "doubly",
             6 => "heaps",
-        ], $node->getAll(LinkedListInterface::DESC));
+        ], $this->linkedList->getAll(LinkedListInterface::DESC));
 
-        $this->assertNotNull($node->getHead());
-        $this->assertNotNull($node->getTail());
-        $this->assertSame(10, $node->count());
-        $this->assertSame(9, $node
+        $this->assertNotNull($this->linkedList->getHead());
+        $this->assertNotNull($this->linkedList->getTail());
+        $this->assertSame("heaps", $this->linkedList->getHead()->getData());
+        $this->assertSame("linkedList", $this->linkedList->getTail()->getData());
+        $this->assertSame(10, $this->linkedList->count());
+        $this->assertSame(9, $this->linkedList
             ->getTail()
             ->getPrevious()
             ->getPrevious()
             ->getPrevious()
             ->getInsertOrderIndex()
         );
-        $this->assertSame(4, $node
+        $this->assertSame(4, $this->linkedList
             ->getHead()
             ->getNext()
             ->getNext()
             ->getInsertOrderIndex()
         );
-        $this->assertSame("hashMap", $node->find(3, LinkedListInterface::ASC)->getData());
-        $this->assertSame("map", $node->find(1, LinkedListInterface::DESC)->getData());
+        $this->assertSame("hashMap", $this->linkedList->find(3, LinkedListInterface::ASC)->getData());
+        $this->assertSame("map", $this->linkedList->find(1, LinkedListInterface::DESC)->getData());
     }
 
     public function elementsListProvider(): array
