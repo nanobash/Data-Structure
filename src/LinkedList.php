@@ -168,6 +168,10 @@ class LinkedList extends ListNode implements LinkedListInterface
      */
     public function getAll(int $order = LinkedListInterface::ASC): array
     {
+        if (null === $this->head) {
+            return [];
+        }
+
         $list = [];
 
         $pointer = $order === LinkedListInterface::ASC ? $this->head : $this->tail;

@@ -104,6 +104,11 @@ class LinkedListTest extends TestCase
         $this->assertSame("map", $this->linkedList->find(1, LinkedListInterface::DESC)->getData());
     }
 
+    public function testGetAllForEmpty()
+    {
+        $this->assertEmpty($this->linkedList->getAll());
+    }
+
     public function elementsListProvider(): array
     {
         return [
