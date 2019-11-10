@@ -42,6 +42,18 @@ class LinkedListTest extends TestCase
         $this->assertSame($data, $this->linkedList->getData());
     }
 
+    public function testFindOnNull()
+    {
+        $this->setUpLinkedList();
+
+        $this->assertNull($this->linkedList->find(101));
+    }
+
+    public function testAddOnNull()
+    {
+        $this->assertNull($this->linkedList->add("foo", 9));
+    }
+
     public function testAddFirstAddLastAddFind()
     {
         $this->setUpLinkedList();

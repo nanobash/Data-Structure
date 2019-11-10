@@ -74,8 +74,6 @@ class LinkedList extends ListNode implements LinkedListInterface
 
             --$index;
         } while (null !== ($pointer = $order === LinkedListInterface::ASC ? $pointer->getNext() : $pointer->getPrevious()));
-
-        return null;
     }
 
     /**
