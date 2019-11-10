@@ -20,9 +20,6 @@ class ListNode implements ListNodeInterface
     /** @var int|null */
     private $orderIndex = 1;
 
-    /** @var int */
-    private $count = 0;
-
     /**
      * @param mixed $data
      */
@@ -47,10 +44,6 @@ class ListNode implements ListNodeInterface
     public function setData($data): ListNode
     {
         $this->data = $data;
-
-        if (null !== $data) {
-            ++$this->count;
-        }
 
         return $this;
     }
@@ -77,14 +70,6 @@ class ListNode implements ListNodeInterface
     public function getOrderIndex(): int
     {
         return $this->orderIndex;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function count(): int
-    {
-        return $this->count;
     }
 
     /**
@@ -131,18 +116,6 @@ class ListNode implements ListNodeInterface
     protected function increaseOrderIndex(): ListNode
     {
         ++$this->orderIndex;
-
-        return $this;
-    }
-
-    /**
-     * Increases count parameter.
-     *
-     * @return ListNode
-     */
-    protected function increaseCount(): ListNode
-    {
-        ++$this->count;
 
         return $this;
     }

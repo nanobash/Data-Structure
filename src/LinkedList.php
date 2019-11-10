@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ProjectX\DataStructure;
 
+use ProjectX\DataStructure\Exceptions\LinkedListNodeNotFound;
 use ProjectX\DataStructure\Interfaces\LinkedListInterface;
 
 class LinkedList extends ListNode implements LinkedListInterface
@@ -13,6 +14,9 @@ class LinkedList extends ListNode implements LinkedListInterface
 
     /** @var ListNode|null */
     private $tail = null;
+
+    /** @var int */
+    private $count = 0;
 
     /**
      * @param null $data
@@ -27,7 +31,13 @@ class LinkedList extends ListNode implements LinkedListInterface
      */
     public function __toString(): string
     {
-        return sprintf("Head -> %s\nTail -> %s", $this->getHead()->getData(), $this->getTail()->getData());
+        $fmt = '';
+
+        $fmt .= "Head -> " . (null !== $this->head ? $this->head->getData() : "NULL");
+        $fmt .= "\n";
+        $fmt .= "Tail -> " . (null !== $this->tail ? $this->tail->getData() : "NULL");
+
+        return $fmt;
     }
 
     /**
@@ -51,7 +61,7 @@ class LinkedList extends ListNode implements LinkedListInterface
      */
     public function find(int $index = 0, int $order = LinkedListInterface::ASC): ?ListNode
     {
-        if ($index >= $this->count()) {
+        if ($index >= $this->count) {
             return null;
         }
 
@@ -98,7 +108,7 @@ class LinkedList extends ListNode implements LinkedListInterface
         $newListNode->setOrderIndex($this->getOrderIndex());
 
         $this->increaseOrderIndex();
-        $this->increaseCount();
+        ++$this->count;
 
         return $this;
     }
@@ -124,7 +134,33 @@ class LinkedList extends ListNode implements LinkedListInterface
         $this->head = $newListNode;
 
         $this->increaseOrderIndex();
-        $this->increaseCount();
+        ++$this->count;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @throws LinkedListNodeNotFound
+     */
+    public function deleteFirst(): LinkedListInterface
+    {
+        if (0 === $this->count) {
+            throw new LinkedListNodeNotFound("LinkedList node not found!");
+        }
+
+        $this->head = $this->head->getNext();
+
+        if (null !== $this->head) {
+            $this->head->setPrevious(null);
+        }
+
+        --$this->count;
+
+        if (0 === $this->count) {
+            $this->tail = null;
+        }
 
         return $this;
     }
@@ -150,7 +186,33 @@ class LinkedList extends ListNode implements LinkedListInterface
         $this->tail = $newListNode;
 
         $this->increaseOrderIndex();
-        $this->increaseCount();
+        ++$this->count;
+
+        return $this;
+    }
+
+    /**
+     * @return LinkedListInterface
+     *
+     * @throws LinkedListNodeNotFound
+     */
+    public function deleteLast(): LinkedListInterface
+    {
+        if (0 === $this->count) {
+            throw new LinkedListNodeNotFound("LinkedList node not found!");
+        }
+
+        $this->tail = $this->tail->getPrevious();
+
+        if (null !== $this->tail) {
+            $this->tail->setNext(null);
+        }
+
+        --$this->count;
+
+        if (0 === $this->count) {
+            $this->head = null;
+        }
 
         return $this;
     }
@@ -173,5 +235,10 @@ class LinkedList extends ListNode implements LinkedListInterface
         } while (null !== ($pointer = $order === LinkedListInterface::ASC ? $pointer->getNext() : $pointer->getPrevious()));
 
         return $list;
+    }
+
+    public function count(): int
+    {
+        return $this->count;
     }
 }

@@ -57,7 +57,6 @@ class ListNodeTest extends TestCase
         }
 
         $this->assertSame($data, $this->node->getData());
-        $this->assertSame(null === $data ? 0 : 1, $this->node->count());
         $this->assertSame(1, $this->node->getOrderIndex());
     }
 

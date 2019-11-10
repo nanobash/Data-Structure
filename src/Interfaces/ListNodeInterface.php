@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace ProjectX\DataStructure\Interfaces;
 
-use Countable;
 use ProjectX\DataStructure\ListNode;
 
-interface ListNodeInterface extends Countable
+interface ListNodeInterface
 {
     public function getOrderIndex(): int;
 

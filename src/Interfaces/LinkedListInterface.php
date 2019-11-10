@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ProjectX\DataStructure\Interfaces;
 
+use Countable;
 use ProjectX\DataStructure\LinkedList;
 use ProjectX\DataStructure\ListNode;
 
@@ -12,7 +13,7 @@ use ProjectX\DataStructure\ListNode;
  *
  * @package ProjectX\DataStructure\Interfaces
  */
-interface LinkedListInterface
+interface LinkedListInterface extends Countable
 {
     public const ASC = 1;
 
@@ -52,13 +53,27 @@ interface LinkedListInterface
     public function addFirst($data): LinkedListInterface;
 
     /**
-     * Adds element in the back of the LinkedList.
+     * Deletes element from the front of the LinkedList.
+     *
+     * @return LinkedListInterface
+     */
+    public function deleteFirst(): LinkedListInterface;
+
+    /**
+     * Adds an element in the back of the LinkedList.
      *
      * @param $data
      *
      * @return LinkedListInterface
      */
     public function addLast($data): LinkedListInterface;
+
+    /**
+     * Deletes an element from the back of the LinkedList.
+     *
+     * @return LinkedListInterface
+     */
+    public function deleteLast(): LinkedListInterface;
 
     /**
      * Returns element of the LinkedList or null if not found based on specified index & order.
