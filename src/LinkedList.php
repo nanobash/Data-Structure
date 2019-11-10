@@ -58,11 +58,13 @@ class LinkedList extends ListNode implements LinkedListInterface
 
     /**
      * @inheritDoc
+     *
+     * @throws LinkedListNodeNotFound
      */
     public function find(int $index = 0, int $order = LinkedListInterface::ASC): ?ListNode
     {
         if ($index >= $this->count) {
-            return null;
+            throw new LinkedListNodeNotFound("LinkedList node not found!");
         }
 
         $pointer = $order === LinkedListInterface::ASC ? $this->head : $this->tail;
@@ -78,11 +80,13 @@ class LinkedList extends ListNode implements LinkedListInterface
 
     /**
      * @inheritDoc
+     *
+     * @throws LinkedListNodeNotFound
      */
     public function add($data, int $index = 0, int $order = LinkedListInterface::ASC, bool $before = true): ?LinkedListInterface
     {
         if (null === ($current = $this->find($index, $order))) {
-            return null;
+            throw new LinkedListNodeNotFound("LinkedList node not found!");
         }
 
         $newListNode = new ListNode($data);
@@ -107,6 +111,28 @@ class LinkedList extends ListNode implements LinkedListInterface
 
         $this->increaseOrderIndex();
         ++$this->count;
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @throws LinkedListNodeNotFound
+     */
+    public function delete(int $index, int $order = LinkedListInterface::ASC): LinkedListInterface
+    {
+        if (null === ($current = $this->find($index, $order))) {
+            throw new LinkedListNodeNotFound("LinkedList node not found!");
+        }
+
+        $previous = $current->getPrevious();
+        $next = $current->getNext();
+
+        $previous->setNext($next);
+        $next->setPrevious($previous);
+
+        --$this->count;
 
         return $this;
     }

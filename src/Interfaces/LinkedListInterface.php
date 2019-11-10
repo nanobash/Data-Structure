@@ -44,6 +44,16 @@ interface LinkedListInterface extends Countable
     public function add($data, int $index = 0, int $order = LinkedList::ASC, bool $before = true): ?LinkedListInterface;
 
     /**
+     * Deletes $index param from LinkedList.
+     *
+     * @param int $index
+     * @param int $order
+     *
+     * @return LinkedListInterface
+     */
+    public function delete(int $index, int $order = LinkedList::ASC): LinkedListInterface;
+
+    /**
      * Adds element in front of the LinkedList.
      *
      * @param $data

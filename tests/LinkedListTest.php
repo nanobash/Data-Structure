@@ -42,16 +42,24 @@ class LinkedListTest extends TestCase
         $this->assertSame($data, $this->linkedList->getData());
     }
 
+    /**
+     * @throws LinkedListNodeNotFound
+     */
     public function testFindOnNull()
     {
-        $this->setUpLinkedList();
+        $this->expectException(LinkedListNodeNotFound::class);
 
-        $this->assertNull($this->linkedList->find(101));
+        $this->linkedList->find(101);
     }
 
+    /**
+     * @throws LinkedListNodeNotFound
+     */
     public function testAddOnNull()
     {
-        $this->assertNull($this->linkedList->add("foo", 9));
+        $this->expectException(LinkedListNodeNotFound::class);
+
+        $this->linkedList->add("foo", 404);
     }
 
     public function testAddFirstAddLastAddFind()
@@ -104,6 +112,18 @@ class LinkedListTest extends TestCase
         );
         $this->assertSame("hashMap", $this->linkedList->find(3, LinkedListInterface::ASC)->getData());
         $this->assertSame("map", $this->linkedList->find(1, LinkedListInterface::DESC)->getData());
+    }
+
+    /**
+     * @throws LinkedListNodeNotFound
+     */
+    public function testDeleteOnException()
+    {
+        $this->setUpLinkedList();
+
+        $this->expectException(LinkedListNodeNotFound::class);
+
+        $this->linkedList->delete(404);
     }
 
     /**
