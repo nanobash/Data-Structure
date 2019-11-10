@@ -151,7 +151,7 @@ class LinkedList extends ListNode implements LinkedListInterface
             $this->head->setPrevious($newListNode);
         }
 
-        if (1 === $this->getOrderIndex()) {
+        if (0 === $this->count()) {
             $this->tail = $newListNode;
         }
 
@@ -203,7 +203,7 @@ class LinkedList extends ListNode implements LinkedListInterface
             $this->tail->setNext($newListNode);
         }
 
-        if (1 === $this->getOrderIndex()) {
+        if (0 === $this->count()) {
             $this->head = $newListNode;
         }
 
